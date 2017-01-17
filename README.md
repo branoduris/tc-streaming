@@ -1,8 +1,13 @@
 # tc-streaming
 
 
-## setup Twitter API access keys
+## setup AWS credentials
 
+```bash
+awsp [profile_name]
+```
+
+## setup Twitter API access keys
 
 ```bash
 export tc_twitter_consumer_key=[CONSUMER_KEY]

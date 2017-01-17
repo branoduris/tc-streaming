@@ -5,7 +5,7 @@ import tweepy
 import default_config
 
 # Create the Boto3 Session
-session = boto3.Session(profile_name='brano')
+session = boto3.Session(profile_name=default_config.AWS_DEFAULT_PROFILE)
 sqs_client = session.client('sqs')
 
 
@@ -25,16 +25,12 @@ class TwitterStreamListener(tweepy.StreamListener):
 
     def on_status(self, status):
         json_str = json.dumps(status._json)
-
-        # decoded = json.loads(html.unescape(data))
         print(json_str)
-
         response = sqs_client.send_message(
             QueueUrl=queue_url,
             MessageBody=json_str
         )
         print(response)
-
         return True
 
     def on_error(self, status_code):
